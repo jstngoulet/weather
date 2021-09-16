@@ -7,23 +7,45 @@
 
 import UIKit
 
+/**
+ The primary controller on the view. Houses the summary
+ */
 class RootWeatherViewController: CommonViewController {
+    
+    private lazy var backgroundImageView: UIImageView = {
+        let img = UIImageView()
+        img.contentMode = .scaleAspectFill
+//        img.image = viewModel.backgroundImage //  Set the background image based on time of day
+        return img
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+
+}
+
+//  MARK: - Build and Construct the view
+private extension RootWeatherViewController {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    /// Wrapper function to build the view
+    func build() {
+        addSubviews()
+        setContraints()
     }
-    */
-
+    
+    /// Adds the children views to the parent
+    func addSubviews() {
+        view.addChildren([
+        
+        ])
+    }
+    
+    /// Sets the constraints on the children views
+    func setContraints() {
+        
+    }
+    
 }

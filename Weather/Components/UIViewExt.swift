@@ -6,3 +6,17 @@
 //
 
 import Foundation
+import UIKit
+
+/**
+ Extends UIView for helpful functions
+ */
+extension UIView {
+    
+    /// Adds an array of subviews to the parnet
+    /// - Parameter views: The list of subviews to add to the parent
+    func addChildren(_ views: [UIView]) {
+        views.forEach({ addSubview($0 )})
+    }
+    
+}

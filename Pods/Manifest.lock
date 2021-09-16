@@ -1,0 +1,23 @@
+PODS:
+  - Keys (1.0.1)
+  - PureLayout (3.1.9)
+
+DEPENDENCIES:
+  - Keys (from `Pods/CocoaPodsKeys`)
+  - PureLayout
+
+SPEC REPOS:
+  trunk:
+    - PureLayout
+
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
+SPEC CHECKSUMS:
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
+  PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
+
+PODFILE CHECKSUM: 3d371087b1d3166970cfc70a4736f9f7f1d08ae9
+
+COCOAPODS: 1.10.2

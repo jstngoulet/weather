@@ -40,8 +40,7 @@ class AppManager: NSObject,
     /// This must wait until after init as we need the initialized application
     /// - Parameter app: The application that was initializd
     private func showFirstController(for app: UIApplication) {
-        let startingRoot = CommonViewController()
-        startingRoot.view.backgroundColor = .red
+        let startingRoot = RootWeatherViewController()
         
         let startingController: UINavigationController = UINavigationController(
             rootViewController: startingRoot

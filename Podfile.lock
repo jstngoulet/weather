@@ -1,14 +1,17 @@
 PODS:
   - Keys (1.0.1)
   - PureLayout (3.1.9)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - PureLayout
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - PureLayout
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   Keys:
@@ -17,7 +20,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 3d371087b1d3166970cfc70a4736f9f7f1d08ae9
+PODFILE CHECKSUM: 89c93235dc343b761a3248b3985072b3d0c7f0cd
 
 COCOAPODS: 1.10.2

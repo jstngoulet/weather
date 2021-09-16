@@ -25,6 +25,7 @@ extension CommonViewController {
         navigationBar.barStyle = .default
         navigationBar.isTranslucent = true
         navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.tintColor = .white
     }
     
 }

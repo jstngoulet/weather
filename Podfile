@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '12.1'
+inhibit_all_warnings!
 
 plugin 'cocoapods-keys', {
   :project => "Weather",
@@ -13,6 +14,7 @@ target 'Weather' do
 
   # Pods for Weather
   pod 'PureLayout'
+  pod 'SwiftyJSON'
 
   target 'WeatherTests' do
     inherit! :search_paths

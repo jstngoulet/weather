@@ -77,7 +77,7 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        5
+        7
     }
     
     func collectionView(
@@ -102,6 +102,21 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
             width: collectionView.frame.width/1.75,
             height: collectionView.frame.height
                 - (Constants.offset * 2)
+        )
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        //  Get the current controller
+        guard let startingController = viewController
+        else { return }
+        
+        //  Show the details for the day with teh specified ID
+        ViewRouter.showDetails(
+            forLocation: "",
+            fromController: startingController
         )
     }
     

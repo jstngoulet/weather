@@ -15,6 +15,7 @@ target 'Weather' do
   # Pods for Weather
   pod 'PureLayout'
   pod 'SwiftyJSON'
+  pod 'MaterialComponents/Snackbar'
 
   target 'WeatherTests' do
     inherit! :search_paths

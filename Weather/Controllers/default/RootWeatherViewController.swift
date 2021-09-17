@@ -18,7 +18,7 @@ class RootWeatherViewController: CommonViewController {
         lbl.font = UIFont.boldSystemFont(ofSize: 100)
         lbl.textAlignment = .center
         lbl.adjustsFontSizeToFitWidth = true
-        lbl.text = "25"
+        lbl.text = "--"
         lbl.textColor = .white
         lbl.shadowColor = .darkGray
         lbl.shadowOffset = CGFloat(2).sizeValue
@@ -41,7 +41,7 @@ class RootWeatherViewController: CommonViewController {
        let lbl = UILabel()
         lbl.font = UIFont.boldSystemFont(ofSize: 24)
         lbl.textColor = .white
-        lbl.text = "Vista, CA"
+        lbl.text = "Location Permission Required"
         lbl.textAlignment = .center
         lbl.adjustsFontSizeToFitWidth = true
         lbl.textColor = .white
@@ -54,6 +54,7 @@ class RootWeatherViewController: CommonViewController {
         let imgView = UIImageView()
         imgView.contentMode = .scaleAspectFit
         imgView.image = UIImage(named: "house_img")
+        imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
     
@@ -66,6 +67,7 @@ class RootWeatherViewController: CommonViewController {
         collection.dataSource = viewModel
         collection.delegate = viewModel
         collection.backgroundColor = .clear
+        collection.showsHorizontalScrollIndicator = false
         
         collection.register(
             SmallWeatherCollectionViewCell.self,
@@ -93,6 +95,7 @@ class RootWeatherViewController: CommonViewController {
     /// Lifecycle function to load the view
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Current Weather"
         build()
     }
     
@@ -151,13 +154,13 @@ private extension RootWeatherViewController {
         degreeLabel.autoPinEdge(.bottom, to: .bottom, of: mainTempLabel)
         degreeLabel.autoPinEdge(.left, to: .right, of: mainTempLabel)
         
-        locationLabel.autoPinEdge(.left, to: .left, of: mainTempLabel)
-        locationLabel.autoPinEdge(.right, to: .right, of: mainTempLabel)
+        locationLabel.autoPinEdge(toSuperviewEdge: .left, withInset: Constants.offset)
+        locationLabel.autoPinEdge(toSuperviewEdge: .right, withInset: Constants.offset)
         locationLabel.autoPinEdge(.top, to: .bottom, of: mainTempLabel,
                                   withOffset: Constants.offset)
         
-        backgroundImageView.autoPinEdge(.left, to: .left, of: locationLabel)
-        backgroundImageView.autoPinEdge(.right, to: .right, of: locationLabel)
+        backgroundImageView.autoPinEdge(toSuperviewEdge: .left, withInset: Constants.offset)
+        backgroundImageView.autoPinEdge(toSuperviewEdge: .right, withInset: Constants.offset)
         backgroundImageView.autoPinEdge(.top, to: .bottom, of: locationLabel, withOffset: Constants.offset)
         backgroundImageView.autoPinEdge(.bottom, to: .top, of: collectionView, withOffset: -Constants.offset)
         

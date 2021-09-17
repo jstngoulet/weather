@@ -1,15 +1,88 @@
 PODS:
   - Keys (1.0.1)
+  - MaterialComponents/AnimationTiming (124.2.0)
+  - MaterialComponents/Availability (124.2.0)
+  - MaterialComponents/Buttons (124.2.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/Shadow
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Elevation (124.2.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (124.2.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/OverlayWindow (124.2.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Application (124.2.0)
+  - MaterialComponents/private/Color (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (124.2.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/private/Overlay (124.2.0)
+  - MaterialComponents/Ripple (124.2.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Shadow (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/ShadowElevations (124.2.0)
+  - MaterialComponents/ShadowLayer (124.2.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (124.2.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (124.2.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Snackbar (124.2.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/OverlayWindow
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/Overlay
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+  - MaterialComponents/Typography (124.2.0):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+    - MDFTextAccessibility
+  - MDFInternationalization (3.0.0)
+  - MDFTextAccessibility (2.0.1)
   - PureLayout (3.1.9)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
+  - MaterialComponents/Snackbar
   - PureLayout
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - PureLayout
     - SwiftyJSON
 
@@ -19,9 +92,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
+  MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
   PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 89c93235dc343b761a3248b3985072b3d0c7f0cd
+PODFILE CHECKSUM: e3f273a462fe75abccfc3b561b4822b0e1611398
 
 COCOAPODS: 1.10.2

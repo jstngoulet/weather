@@ -41,7 +41,7 @@ class RootWeatherViewController: CommonViewController {
        let lbl = UILabel()
         lbl.font = UIFont.boldSystemFont(ofSize: 24)
         lbl.textColor = .white
-        lbl.text = "Location Permission Required"
+        lbl.text = viewModel.locationText
         lbl.textAlignment = .center
         lbl.adjustsFontSizeToFitWidth = true
         lbl.textColor = .white
@@ -133,7 +133,6 @@ private extension RootWeatherViewController {
         
         //  Set the gradient on the view
         view.setGradient(colors: viewModel.currentColors)
-        viewModel.collection = collectionView
     }
     
     /// Adds the children views to the parent

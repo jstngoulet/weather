@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct StorableWeatherResponse: Codable {
+    let id: String                  //  This is current coordinate, rounded
+    let dateStored: Int             //  unix time
+    let weather: WeatherAPIResponse //  Stored data
+}
+
 struct WeatherAPIResponse: Codable {
     let lat: Double
     let lon: Double

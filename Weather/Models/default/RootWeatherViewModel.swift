@@ -18,6 +18,33 @@ protocol WeatherLoadingDelegate: NSObjectProtocol {
  */
 class RootWeatherViewModel: ViewModel {
     
+    /// Could be loaded from somewhere else
+    struct ViewText: Codable {
+        var needLocationText: String    = "Location Permissions Needed"
+        var loadingText: String         = "Loading Weather"
+        var restrictedText: String      = "Location Permissions Limited"
+    }
+    
+    /// The current text for the page
+    private(set) var currentText: ViewText = ViewText()
+    
+    var locationText: String {
+        guard let locationStatus = previousAuthStatus
+        else { return currentText.needLocationText }
+        
+        switch locationStatus {
+        case .notDetermined:
+            return currentText.needLocationText
+        case .restricted
+             , .denied:
+            return currentText.restrictedText
+        case .authorizedAlways
+             , .authorizedWhenInUse:
+            return currentText.loadingText
+        @unknown default: return currentText.needLocationText
+        }
+    }
+    
     /// The previous weather response
     var currentWeather: WeatherAPIResponse? {
         didSet {
@@ -33,6 +60,9 @@ class RootWeatherViewModel: ViewModel {
     
     /// The current weather loading delegate
     weak var delegate: WeatherLoadingDelegate?
+    
+    /// Set the auth status as it changes
+    private var previousAuthStatus: CLAuthorizationStatus?
     
     /// Determine the current colors to show, live, when needed
     /// This will be placed in the gradient
@@ -61,21 +91,17 @@ class RootWeatherViewModel: ViewModel {
         }
     }
     
+    /// The location manager for determining location
+    private lazy var locationMgr: CLLocationManager = {
+       let mgr = CLLocationManager()
+        mgr.delegate = self
+        return mgr
+    }()
+    
     override init() {
         super.init()
         //  Check location authorisation
-        WeatherAPIRequestManager.getLocationMockReponse(
-            forLocation: CLLocationCoordinate2D(latitude: 72.22, longitude: 33.11)
-        ) { [weak self] result in
-            guard let wSelf = self else { return }
-            switch result {
-            case .failure(let err):
-                wSelf.show(message: err.localizedDescription)
-            case .success(let response):
-                wSelf.currentWeather = response
-            }
-            wSelf.delegate?.weatherLoaded(result: result)
-        }
+        locationMgr.desiredAccuracy = .leastNonzeroMagnitude    //  Creates instance
     }
     
     deinit {
@@ -91,13 +117,36 @@ extension RootWeatherViewModel {
     /// Reloads the view, if available from the API
     @IBAction
     func reloadView() {
-        show(message: "Reloading")
+        guard let currentLocation = locationMgr.location?.coordinate
+        else { return }
+        
+        WeatherAPIRequestManager.getLocationMockReponse(
+            forLocation: CLLocationCoordinate2D(
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude
+            )
+        ) { [weak self] result in
+            guard let wSelf = self else { return }
+            switch result {
+            case .failure(let err):
+                wSelf.show(message: err.localizedDescription)
+            case .success(let response):
+                wSelf.currentWeather = response
+            }
+            wSelf.delegate?.weatherLoaded(result: result)
+        }
     }
     
     /// Request the permissions for location, if required
     @IBAction
     func requestPermissionIfNeeded() {
-        show(message: "Permissions Required")
+        if let currentAuth = previousAuthStatus
+           , currentAuth == .notDetermined {
+            //  Request Permission
+            locationMgr.requestWhenInUseAuthorization()
+        } else {
+            show(message: "Location already determined")
+        }
     }
     
 }
@@ -137,7 +186,7 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
         currentCell.set(
             date: Date(timeIntervalSince1970: TimeInterval(day.dt)),
             low: String(Int(day.temp.min)),     //  Set as int as no one cares about decimal
-            high: String(Int(day.temp.max)),    //  ^ 
+            high: String(Int(day.temp.max)),    //  ^
             iconURL: day.weather.first?.iconURL ?? "",
             updatedTime: Date()
         )
@@ -171,6 +220,44 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
             forLocation: weather,
             fromController: startingController
         )
+    }
+    
+}
+
+//  Location Permissions
+extension RootWeatherViewModel: CLLocationManagerDelegate {
+    
+    func locationManager(
+        _ manager: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus
+    ) {
+        //  Report Analyticss
+        
+        //  if successful, reload. else, do nothing
+        if [
+            .authorizedAlways
+            , .authorizedWhenInUse
+        ].contains(status) {
+            //  Reload the view
+            reloadView()
+        } else {
+            //   do nothing
+        }
+        
+        //  Keep the status updated.
+        //  If this is first attempt, reload
+        if previousAuthStatus == nil {
+            previousAuthStatus = status
+            reloadView()
+        }
+    }
+    
+    /// Location manager errors. Crashes if this function is not present
+    /// - Parameters:
+    ///   - manager:    The current lcoation manager
+    ///   - error:      The error that was found on location updates
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager failure: \(error.localizedDescription)")
     }
     
 }

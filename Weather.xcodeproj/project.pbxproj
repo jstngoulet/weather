@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2242C91B4DC3B4A2587813F8 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF77786A22C8E094DFFEE8F /* Pods_Weather.framework */; };
+		4271DE3926F484F4001304A2 /* WeatherDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4271DE3826F484F4001304A2 /* WeatherDetailsViewController.swift */; };
+		4271DE3A26F484F4001304A2 /* WeatherDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4271DE3826F484F4001304A2 /* WeatherDetailsViewController.swift */; };
+		4271DE3B26F484F4001304A2 /* WeatherDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4271DE3826F484F4001304A2 /* WeatherDetailsViewController.swift */; };
 		42BFC07126F2CF5C009A56E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BFC07026F2CF5C009A56E9 /* AppDelegate.swift */; };
 		42BFC07B26F2CF5C009A56E9 /* Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42BFC07926F2CF5C009A56E9 /* Weather.xcdatamodeld */; };
 		42BFC07D26F2CF5F009A56E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42BFC07C26F2CF5F009A56E9 /* Assets.xcassets */; };
@@ -73,6 +76,7 @@
 		1FC2C06967ADD2320250C56C /* Pods_Weather_WeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather_WeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		303966249D2D92EC55864A70 /* Pods-Weather-WeatherUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-WeatherUITests.debug.xcconfig"; path = "Target Support Files/Pods-Weather-WeatherUITests/Pods-Weather-WeatherUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		385C5FE9E2EDD7FF3BB0453A /* Pods_WeatherTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4271DE3826F484F4001304A2 /* WeatherDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsViewController.swift; sourceTree = "<group>"; };
 		42BFC06D26F2CF5C009A56E9 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42BFC07026F2CF5C009A56E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42BFC07A26F2CF5C009A56E9 /* Weather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weather.xcdatamodel; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				42EE67A626F2E10B004D611F /* RootWeatherViewController.swift */,
+				4271DE3826F484F4001304A2 /* WeatherDetailsViewController.swift */,
 			);
 			path = default;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 				42BFC07B26F2CF5C009A56E9 /* Weather.xcdatamodeld in Sources */,
 				42EE679E26F2DD06004D611F /* CommonViewController.swift in Sources */,
 				42EE67AF26F2F0F0004D611F /* CGFloatExt.swift in Sources */,
+				4271DE3926F484F4001304A2 /* WeatherDetailsViewController.swift in Sources */,
 				42BFC0A926F2D11A009A56E9 /* AppManager.swift in Sources */,
 				42BFC07126F2CF5C009A56E9 /* AppDelegate.swift in Sources */,
 				42EE67A726F2E10B004D611F /* RootWeatherViewController.swift in Sources */,
@@ -583,6 +589,7 @@
 				42EE67B426F2F407004D611F /* ViewModel.swift in Sources */,
 				42EE67B826F2F423004D611F /* RootWeatherViewModel.swift in Sources */,
 				42BFC0AA26F2D11A009A56E9 /* AppManager.swift in Sources */,
+				4271DE3A26F484F4001304A2 /* WeatherDetailsViewController.swift in Sources */,
 				42EE67BC26F2F70B004D611F /* Constants.swift in Sources */,
 				42EE67CE26F460D3004D611F /* WeatherAPIRequestManager.swift in Sources */,
 				42EE67C926F45536004D611F /* OneAPIDataModel.swift in Sources */,
@@ -604,6 +611,7 @@
 				42EE67B926F2F423004D611F /* RootWeatherViewModel.swift in Sources */,
 				42EE67BD26F2F70B004D611F /* Constants.swift in Sources */,
 				42EE67B026F2F0F0004D611F /* CGFloatExt.swift in Sources */,
+				4271DE3B26F484F4001304A2 /* WeatherDetailsViewController.swift in Sources */,
 				42EE67A826F2E10B004D611F /* RootWeatherViewController.swift in Sources */,
 				42EE67B526F2F407004D611F /* ViewModel.swift in Sources */,
 				42EE67A426F2DE30004D611F /* ViewRouter.swift in Sources */,

@@ -50,12 +50,12 @@ class ViewRouter: NSObject {
         DispatchQueue.main.async {
             if let navController = fromController.navigationController {
                 navController.pushViewController(
-                    CommonViewController(),
+                    WeatherDetailsViewController(withWeather: location),
                     animated: true
                 )
             } else {
                 fromController.present(
-                    CommonViewController(),
+                    WeatherDetailsViewController(withWeather: location),
                     animated: true,
                     completion: nil
                 )

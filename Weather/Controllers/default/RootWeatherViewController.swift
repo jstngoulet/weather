@@ -133,6 +133,7 @@ private extension RootWeatherViewController {
         
         //  Set the gradient on the view
         view.setGradient(colors: viewModel.currentColors)
+        viewModel.collection = collectionView
     }
     
     /// Adds the children views to the parent
@@ -184,6 +185,8 @@ extension RootWeatherViewController: WeatherLoadingDelegate {
                 self.viewModel.show(message: error.localizedDescription)
             case .success(let weather):
                 //  Set the locale and the temp
+                //  @TODO: Format all numbers in view model
+                //  Could also use Combine/RxSwift to bind the weather object to the labels
                 self.mainTempLabel.text = String(Int(weather.current.temp))
                 self.locationLabel.text = weather.timezone
             }

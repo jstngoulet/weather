@@ -17,6 +17,7 @@ class TempLabel: UIView {
         lbl.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         lbl.textAlignment = .center
         lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
     
@@ -25,6 +26,7 @@ class TempLabel: UIView {
         lbl.font = UIFont.preferredFont(forTextStyle: .headline)
         lbl.textAlignment = .center
         lbl.textColor = .darkText
+        lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
     

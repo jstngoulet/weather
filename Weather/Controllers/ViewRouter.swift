@@ -44,7 +44,7 @@ class ViewRouter: NSObject {
     ///   - location: the Location provided from teh API call. Will be used for location lookup
     ///   - fromController: the starting controller in which to navigate from
     class func showDetails(
-        forLocation location: String,
+        forLocation location: WeatherAPIResponse,
         fromController: UIViewController
     ) {
         DispatchQueue.main.async {

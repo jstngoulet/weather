@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MaterialComponents.MDCSnackbarMessage
 
 /**
  The parent class for all view models
@@ -17,6 +18,20 @@ class ViewModel: NSObject {
     
     deinit {
         viewController = nil
+    }
+    
+}
+
+extension ViewModel {
+    
+    /// Shows a snack bar mesage from any view model
+    /// - Parameter message: The mesage to show to the user
+    func show(message: String) {
+        MDCSnackbarManager.default.show(
+            MDCSnackbarMessage(
+                text: message
+            )
+        )
     }
     
 }

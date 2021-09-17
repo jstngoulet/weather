@@ -75,7 +75,23 @@ class AppManager: NSObject,
             .contains(false)
     }
     
-
+    /// Call each manager and report the analytic event, accordingly, if required
+    /// - Parameters:
+    ///   - analytic:   The aanlytic event to fire
+    ///   - dict:       The parameters to include in the event
+    func report(
+        analytic: String,
+        dict: [String : Any]?
+    ) {
+        //  TODO: Commentound when needed
+        print("Reporting Event: \(analytic), with: \(dict ?? [:])")
+        appManagers.forEach({
+                                $0.report(
+                                    analytic: analytic,
+                                    dict: dict
+                                )
+        })
+    }
 }
 
 /**
@@ -94,4 +110,12 @@ protocol AppManagerDelegate: NSObjectProtocol {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool
+    
+    /// Report the analytic event name and paramters to each service
+    /// - Parameter analytic: The analtyic tag name to report
+    /// - Parameter dict: The additional paramters to pass with the event
+    func report(
+        analytic: String,
+        dict: [String: Any]?
+    )
 }

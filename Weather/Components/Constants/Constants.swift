@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Keys
 
 /**
  Global Constants currently available
@@ -14,5 +15,12 @@ import UIKit
 class Constants: NSObject {
 
     static var offset: CGFloat = 15
+    
+    /// Init once, instead of every time
+    private static var currentKeys = WeatherKeys()
+    
+    /// Get the weather api key
+    static var weatherAPIKey: String
+    { currentKeys.openWeatherAPIKey }
     
 }

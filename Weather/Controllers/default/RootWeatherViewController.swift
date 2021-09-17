@@ -89,6 +89,7 @@ class RootWeatherViewController: CommonViewController {
     private lazy var viewModel: RootWeatherViewModel = {
         let model = RootWeatherViewModel()
         model.viewController = self
+        model.delegate = self
         return model
     }()
     
@@ -132,6 +133,7 @@ private extension RootWeatherViewController {
         
         //  Set the gradient on the view
         view.setGradient(colors: viewModel.currentColors)
+        viewModel.collection = collectionView
     }
     
     /// Adds the children views to the parent
@@ -168,6 +170,25 @@ private extension RootWeatherViewController {
             with: .zero,
             excludingEdge: .top
         )
+    }
+    
+}
+
+extension RootWeatherViewController: WeatherLoadingDelegate {
+    
+    /// Update the ui, make sure it is on the main thread, as the result could be on the background thread
+    /// - Parameter result: the primary result of the call
+    func weatherLoaded(result: Result<WeatherAPIResponse, Error>) {
+        DispatchQueue.main.async {
+            switch result {
+            case .failure(let error):
+                self.viewModel.show(message: error.localizedDescription)
+            case .success(let weather):
+                //  Set the locale and the temp
+                self.mainTempLabel.text = String(Int(weather.current.temp))
+                self.locationLabel.text = weather.timezone
+            }
+        }
     }
     
 }

@@ -6,12 +6,33 @@
 //
 
 import UIKit
+import CoreLocation
+
+protocol WeatherLoadingDelegate: NSObjectProtocol {
+    func weatherLoaded(result: Result<WeatherAPIResponse, Error>)
+}
 
 /**
  This class is in charge of all the business logic on the view, including
  what colors to show, the collection view cell factory, scroll management and more
  */
 class RootWeatherViewModel: ViewModel {
+    
+    /// The previous weather response
+    var currentWeather: WeatherAPIResponse? {
+        didSet {
+            //  Reload the table
+            DispatchQueue.main.async {
+                self.collection?.reloadData()
+            }
+        }
+    }
+    
+    /// The current collection view on the deck
+    weak var collection: UICollectionView?
+    
+    /// The current weather loading delegate
+    weak var delegate: WeatherLoadingDelegate?
     
     /// Determine the current colors to show, live, when needed
     /// This will be placed in the gradient
@@ -43,6 +64,23 @@ class RootWeatherViewModel: ViewModel {
     override init() {
         super.init()
         //  Check location authorisation
+        WeatherAPIRequestManager.getLocationMockReponse(
+            forLocation: CLLocationCoordinate2D(latitude: 72.22, longitude: 33.11)
+        ) { [weak self] result in
+            guard let wSelf = self else { return }
+            switch result {
+            case .failure(let err):
+                wSelf.show(message: err.localizedDescription)
+            case .success(let response):
+                wSelf.currentWeather = response
+            }
+            wSelf.delegate?.weatherLoaded(result: result)
+        }
+    }
+    
+    deinit {
+        collection = nil
+        delegate = nil
     }
     
 }
@@ -53,13 +91,13 @@ extension RootWeatherViewModel {
     /// Reloads the view, if available from the API
     @IBAction
     func reloadView() {
-        print("reloading View")
+        show(message: "Reloading")
     }
     
     /// Request the permissions for location, if required
     @IBAction
     func requestPermissionIfNeeded() {
-        print("Checking location permissions")
+        show(message: "Permissions Required")
     }
     
 }
@@ -77,7 +115,7 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        7
+        self.currentWeather?.daily.count ?? 0
     }
     
     func collectionView(
@@ -89,6 +127,20 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
                 for: indexPath
         ) as? SmallWeatherCollectionViewCell
         else { return UICollectionViewCell() }
+        
+        //  Get the current day
+        guard let response = currentWeather
+        else { return UICollectionViewCell() }
+        let day = response.daily[indexPath.row]
+        
+        //  Setup the cell
+        currentCell.set(
+            date: Date(timeIntervalSince1970: TimeInterval(day.dt)),
+            low: String(Int(day.temp.min)),     //  Set as int as no one cares about decimal
+            high: String(Int(day.temp.max)),    //  ^ 
+            iconURL: day.weather.first?.iconURL ?? "",
+            updatedTime: Date()
+        )
         
         return currentCell
     }
@@ -111,11 +163,12 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
     ) {
         //  Get the current controller
         guard let startingController = viewController
+        , let weather = currentWeather
         else { return }
         
         //  Show the details for the day with teh specified ID
         ViewRouter.showDetails(
-            forLocation: "",
+            forLocation: weather,
             fromController: startingController
         )
     }

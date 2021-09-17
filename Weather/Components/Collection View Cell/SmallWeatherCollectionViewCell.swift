@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 /**
  Class for the collection view cel
@@ -139,6 +140,55 @@ private extension SmallWeatherCollectionViewCell {
         lastUpdatedLabel.autoPinEdgesToSuperviewEdges(
             with: Constants.offset.insetValue,
             excludingEdge: .top
-        )    }
+        )
+        
+        //  Layout the subviews, then keep the image view size
+        layoutSubviews()
+        weatherImageView.autoSetDimension(.height, toSize: weatherImageView.frame.height)
+    }
+    
+}
+
+extension SmallWeatherCollectionViewCell {
+    
+    /// Sets the content on the cell
+    /// - Parameters:
+    ///   - date: the date in which is being applied
+    ///   - low: Th low for the given day
+    ///   - high: The high for the given time
+    ///   - iconURL: The icon url to display in the image view
+    ///   - updatedTime: The updated time in which the data was fetched
+    func set(
+        date: Date
+        , low: String
+        , high: String
+        , iconURL: String
+        , updatedTime: Date
+    ) {
+        //  Show the date.time
+        let longFormatter = DateFormatter()
+        longFormatter.dateFormat = "EEEE, M/dd"
+        shownDayLabel.text = longFormatter.string(from: date)
+        
+        weatherImageView.af.setImage(
+            withURL: URL(string: iconURL)!,
+            cacheKey: iconURL,
+            placeholderImage: UIImage(named: "season_change"),
+            serializer: nil,
+            filter: nil,
+            progress: nil,
+            progressQueue: DispatchQueue(label: "com..weather.image"),
+            imageTransition: .noTransition,
+            runImageTransitionIfCached: false,
+            completion: nil
+        )
+        
+        lowItem.set(title: low)
+        highItem.set(title: high)
+        
+        longFormatter.dateFormat = "EEEE, MMM d @ hh:mm a"
+        lastUpdatedLabel.text = "Last Updated:\n"
+            + longFormatter.string(from: updatedTime)
+    }
     
 }

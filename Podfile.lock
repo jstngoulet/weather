@@ -1,4 +1,7 @@
 PODS:
+  - Alamofire (5.4.3)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
   - Keys (1.0.1)
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
@@ -73,6 +76,7 @@ PODS:
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
+  - AlamofireImage
   - Keys (from `Pods/CocoaPodsKeys`)
   - MaterialComponents/Snackbar
   - PureLayout
@@ -80,6 +84,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - AlamofireImage
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
@@ -91,6 +97,8 @@ EXTERNAL SOURCES:
     :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
@@ -98,6 +106,6 @@ SPEC CHECKSUMS:
   PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: e3f273a462fe75abccfc3b561b4822b0e1611398
+PODFILE CHECKSUM: 90a1a6ec59ebb178be9496adfa7a3dc4912cee07
 
 COCOAPODS: 1.10.2

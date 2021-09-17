@@ -85,8 +85,10 @@ class RootWeatherViewModel: ViewModel {
         default:
             return [
                 .blue
+                , .blue
                 , .white
                 , .green
+                , .brown
             ]
         }
     }
@@ -120,7 +122,7 @@ extension RootWeatherViewModel {
         guard let currentLocation = locationMgr.location?.coordinate
         else { return }
         
-        WeatherAPIRequestManager.getLocationMockReponse(
+        WeatherAPIRequestManager.getLocationResponse(
             forLocation: CLLocationCoordinate2D(
                 latitude: currentLocation.latitude,
                 longitude: currentLocation.longitude
@@ -215,6 +217,8 @@ extension RootWeatherViewModel: UICollectionViewDelegateFlowLayout
         , let weather = currentWeather
         else { return }
         
+        //  Report Analytcs
+        
         //  Show the details for the day with teh specified ID
         ViewRouter.showDetails(
             forLocation: weather,
@@ -257,7 +261,7 @@ extension RootWeatherViewModel: CLLocationManagerDelegate {
     ///   - manager:    The current lcoation manager
     ///   - error:      The error that was found on location updates
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location manager failure: \(error.localizedDescription)")
+        show(message: "Location manager failure: \(error.localizedDescription)")
     }
     
 }

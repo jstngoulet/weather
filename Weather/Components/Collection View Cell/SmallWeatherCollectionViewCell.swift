@@ -163,7 +163,7 @@ extension SmallWeatherCollectionViewCell {
         , low: String
         , high: String
         , iconURL: String
-        , updatedTime: Date
+        , updatedTime: Date 
     ) {
         //  Show the date.time
         let longFormatter = DateFormatter()
@@ -186,7 +186,7 @@ extension SmallWeatherCollectionViewCell {
         lowItem.set(title: low)
         highItem.set(title: high)
         
-        longFormatter.dateFormat = "EEEE, MMM d @ hh:mm a"
+        longFormatter.dateFormat = "EEEE, MMM d @ hh:mm a"  //  Should be in model
         lastUpdatedLabel.text = "Last Updated:\n"
             + longFormatter.string(from: updatedTime)
     }

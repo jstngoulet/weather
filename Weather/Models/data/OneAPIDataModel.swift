@@ -20,18 +20,6 @@ struct WeatherAPIResponse: Codable {
     let current: Current
     var hourly: [Hourly]
     var daily: [Daily]
-    
-    mutating func sortHourlyArray() {
-        hourly.sort { (hour1: Hourly, hour2: Hourly) -> Bool in
-            return hour1.dt < hour2.dt
-        }
-    }
-    
-    mutating func sortDailyArray() {
-        daily.sort { (day1, day2) -> Bool in
-            return day1.dt < day2.dt
-        }
-    }
 }
 
 struct Current: Codable {

@@ -22,18 +22,30 @@ class WeatherAPIRequestManager: NSObject {
         case otherError(String)
     }
     
-    class func getLocationMockReponse(
+    /// Gets the location response from the API
+    /// - Parameters:
+    ///   - location: The location to query for
+    ///   - completion: The completion of the call, includes success/failure
+    class func getLocationResponse(
         forLocation location: CLLocationCoordinate2D
         , completion: @escaping (Result<WeatherAPIResponse, Error>) -> Void
     ) {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall")
-        , var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+              , var components = URLComponents(
+                url: url,
+                resolvingAgainstBaseURL: false
+              )
         else {
             completion(.failure(NetworkError.invalidURL))
             return
         }
         
         //  If there is stored data, return that. Else, fetch and store it
+        //  @TODO Grab fetched
+        if let foundData = getWeatherData(forLocation: location) {
+            completion(.success(foundData))
+            return
+        }
         
         //  If valid URL, construct the request
         components.queryItems = [
@@ -57,11 +69,14 @@ class WeatherAPIRequestManager: NSObject {
             if let errorFound = error {
                 completion(.failure(NetworkError.otherError(errorFound.localizedDescription)))
             } else if let dataFound = data
-            , let responseFound = response as? HTTPURLResponse {
+                      , let responseFound = response as? HTTPURLResponse {
                 // Decode the result
                 do {
                     if responseFound.statusCode == 200 {
-                        let weatherResponse = try JSONDecoder().decode(WeatherAPIResponse.self, from: dataFound)
+                        let weatherResponse = try JSONDecoder().decode(
+                            WeatherAPIResponse.self,
+                            from: dataFound
+                        )
                         completion(.success(weatherResponse))
                     } else {
                         completion(
@@ -88,16 +103,19 @@ extension WeatherAPIRequestManager {
     /// - Parameter location: The location to store from. could be zip after geocode
     /// - Parameter expirationMinutes: Number of minutes until refresh required. default 15
     /// - Returns: The weather api response, if still valid
-    func getWeatherData(
-        forLocation location: CLLocation
+    private class func getWeatherData(
+        forLocation location: CLLocationCoordinate2D
         , expirationMinutes: Int = 15
     ) -> WeatherAPIResponse? {
         let defaults = UserDefaults.standard
         
         //  Load the current data store
         if let stored = defaults.object(forKey: "latest_data") as? StorableWeatherResponse {
-            //  Determine if the same coord
+            //  Determine if the same coord, and not expired
+            //  still need to set data
             //  TODO: need to finish
+            
+            return stored.weather
         }
         
         return nil

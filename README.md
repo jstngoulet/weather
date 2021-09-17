@@ -58,8 +58,29 @@ Completed Items:
 - Root controller is UINavigationController
 - Tapping a card shows API result description
 
+Additional Items:
+- Added snack bar message to display messages
+- Gradient is time based
+
 Incomplete items:
 - API Caching and storages
+
+Features wanted to include (besides requirements):
+- URWeatherView, for displaying the current weather on home screen
+- Analytics
+- Crashlytics/Firebase integration
+- Location management via Apple Search API
+- Hourly weather on details
+- Alerts on details
+- Current weather alerts on main
+- Project documentation (internal)
+- Details view models
 - Design on details screen
 - State management (mostly there, but a little buggy for zero state and loading)
-- Project documentation (internal)
+
+#### Project Images
+
+| Screen  | File |
+| ------- | ---- |
+| Home    | ![Home](doc_imgs/Home.PNG)        |
+| Details | ![Details](doc_imgs/Details.PNG)  |
